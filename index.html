@@ -60,10 +60,10 @@
       margin-bottom: 40px;
       z-index: 900;
     }
-    
+
     .btn {
       display: inline-block;
-      margin:auto;
+      margin: auto;
       font-weight: 400;
       text-align: center;
       white-space: nowrap;
@@ -78,11 +78,16 @@
       line-height: 1.25;
       transition: all .15s ease-in-out;
     }
-    
+
     .btn-secondary {
       color: #fff;
       background-color: #263238;
-  }
+    }
+
+    .loader {
+      display: none;
+      margin: auto;
+    }
   </style>
 </head>
 
@@ -134,9 +139,14 @@
             </div>
           </div>
         </div>
-        <button class="btn btn-secondary" onclick="submitInfo()">Submit</button>
       </div>
+      <center>
+        <button class="btn btn-secondary" onclick="submitInfo()">Submit</button>
+        <div class="loader">
+          <img src="img/loader.gif"></img>
+        </div>
 
+      </center>
     </main>
     <div class="mdl-layout__obfuscator"></div>
   </div>
@@ -162,20 +172,24 @@
 <script>
   var namebox = document.getElementById('search1');
   var idbox = document.getElementById('search2');
+  var loading = 0;
 
   idbox.addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {
       submitInfo();
     }
   });
-  
-  function submitInfo()
-  {
-      if (namebox.value == "" || idbox.value == "") {
-        window.alert("The name and/or id is blank. Please correct this.");
-        return;
-      }
-      searchName(namebox.value, idbox.value);
+
+  function submitInfo() {
+    if (loading == 1) return;
+    loading = 1;
+    if (namebox.value == "" || idbox.value == "") {
+      window.alert("The name and/or id is blank. Please correct this.");
+      $('.loader').hide();
+      loading = 0;
+      return;
+    }
+    searchName(namebox.value, idbox.value);
   }
 
   function searchName(name, id) {
@@ -189,6 +203,7 @@
 
     var apiEndpoint = "https://final-overwatch.herokuapp.com/profile/pc/us/" + elemA + "-" + elemB;
 
+    $('.loader').show();
 
     $.ajax({
       url: apiPassThruUrl,
@@ -201,13 +216,13 @@
       }
     }).done(function(data) {
       window.location.assign(link);
+      loading = 0;
     }).fail(function(data) {
       window.alert(elemA + "#" + elemB + " not found for NA servers.");
+      loading = 0;
+      $('.loader').hide();
       return;
     });
-
-
-
   }
 </script>
 
