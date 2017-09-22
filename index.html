@@ -60,12 +60,37 @@
       margin-bottom: 40px;
       z-index: 900;
     }
+    
+    .btn {
+      display: inline-block;
+      margin:auto;
+      font-weight: 400;
+      text-align: center;
+      white-space: nowrap;
+      vertical-align: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      border: 1px solid transparent;
+      padding: 8px;
+      font-size: 16px;
+      line-height: 1.25;
+      transition: all .15s ease-in-out;
+    }
+    
+    .btn-secondary {
+      color: #fff;
+      background-color: #263238;
+  }
   </style>
 </head>
 
+
+
 <body>
   <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
-    <main class="mdl-layout__content">
+    <main>
       <center><img src="https://overwatch-a.akamaihd.net/img/pages/game/backgrounds/game_teams_center-d7d5f0437342f61298a1c2cc4ffbe81d13e70665347b3b470b430ab0dc167668217800f4cf51d2672a854d377faf5456bb25bace0ad8048e38d59c6d64e0f5d7.png" height="384" width="384"></img>
       </center>
 
@@ -109,9 +134,7 @@
             </div>
           </div>
         </div>
-
-
-
+        <button class="btn btn-secondary" onclick="submitInfo()">Submit</button>
       </div>
 
     </main>
@@ -142,14 +165,18 @@
 
   idbox.addEventListener('keypress', function(e) {
     if (e.keyCode == 13) {
-
+      submitInfo();
+    }
+  });
+  
+  function submitInfo()
+  {
       if (namebox.value == "" || idbox.value == "") {
         window.alert("The name and/or id is blank. Please correct this.");
         return;
       }
       searchName(namebox.value, idbox.value);
-    }
-  });
+  }
 
   function searchName(name, id) {
     var elemA = name;
