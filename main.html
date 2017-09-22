@@ -1,218 +1,356 @@
 <!doctype html>
-<!--
-  Material Design Lite
-  Copyright 2015 Google Inc. All rights reserved.
-
-  Licensed under the Apache License, Version 2.0 (the "License");
-  you may not use this file except in compliance with the License.
-  You may obtain a copy of the License at
-
-      https://www.apache.org/licenses/LICENSE-2.0
-
-  Unless required by applicable law or agreed to in writing, software
-  distributed under the License is distributed on an "AS IS" BASIS,
-  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-  See the License for the specific language governing permissions and
-  limitations under the License
--->
-<html lang="en">
+<html lang="en" style="overflow: hidden">
 
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="description" content="A front-end template that helps you build fast, modern mobile web apps.">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
-  <title>Material Design Lite</title>
+    <meta charset="utf-8">
+    <title>jQuery.parseXML demo</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.indigo-pink.min.css">
+    <script src="https://unpkg.com/dexie@latest/dist/dexie.js"></script>
+    <script defer src="https://code.getmdl.io/1.3.0/material.min.js"></script>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 
-  <!-- Add to homescreen for Chrome on Android -->
-  <meta name="mobile-web-app-capable" content="yes">
-  <link rel="icon" sizes="192x192" href="images/android-desktop.png">
+    <link href="css/business-casual.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
 
-  <!-- Add to homescreen for Safari on iOS -->
-  <meta name="apple-mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Material Design Lite">
-  <link rel="apple-touch-icon-precomposed" href="images/ios-desktop.png">
 
-  <!-- Tile icon for Win8 (144x144 + tile color) -->
-  <meta name="msapplication-TileImage" content="images/touch/ms-touch-icon-144x144-precomposed.png">
-  <meta name="msapplication-TileColor" content="#3372DF">
-
-  <link rel="shortcut icon" href="images/favicon.png">
-
-  <!-- SEO: If your mobile URL is different from the desktop URL, add a canonical link to the desktop page https://developers.google.com/webmasters/smartphone-sites/feature-phones -->
-  <!--
-    <link rel="canonical" href="http://www.example.com/">
-    -->
-
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:regular,bold,italic,thin,light,bolditalic,black,medium&amp;lang=en">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-  <link rel="stylesheet" href="https://code.getmdl.io/1.3.0/material.grey-orange.min.css">
-  <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
-  <link rel="stylesheet" href="styles.css">
-  <style>
-    #view-source {
-      position: fixed;
-      display: block;
-      right: 0;
-      bottom: 0;
-      margin-right: 40px;
-      margin-bottom: 40px;
-      z-index: 900;
-    }
-  </style>
+    <style>
+        .mdl-layout__header {
+            background-color: rgb(77, 77, 77);
+        }
+        
+        .mdl-material-icons {
+            background-color: rgb(77, 77, 77);
+        }
+        
+        .mdl-layout__tab-bar-right-button {
+            background-color: rgb(77, 77, 77);
+        }
+        
+        .mdl-js-ripple-effect--ignore-events {
+            background-color: rgb(77, 77, 77);
+        }
+        
+        .mdl-layout__tab-bar-left-button {
+            background-color: rgb(77, 77, 77);
+        }
+        
+        .mdl-layout__tab:hover {
+            color: rgb(255, 255, 255);
+        }
+        
+        .mdl-card {
+            margin-right: auto;
+            margin-left: auto;
+            position: relative
+        }
+        
+        .mdl-js-textfield {
+            margin-right: auto;
+            margin-left: auto;
+            text-align: center
+        }
+    </style>
 </head>
 
 <body>
-  <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
-    <main class="mdl-layout__content">
-      <center><img src="https://overwatch-a.akamaihd.net/img/pages/game/backgrounds/game_teams_center-d7d5f0437342f61298a1c2cc4ffbe81d13e70665347b3b470b430ab0dc167668217800f4cf51d2672a854d377faf5456bb25bace0ad8048e38d59c6d64e0f5d7.png" height="384" width="384"></img>
-      </center>
-
-      <div class="demo-blog__posts mdl-grid">
-
-
-        <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
-          <div class="mdl-card__title mdl-color-text--grey-50">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="text" maxlength="12" placeholder="Enter Name" id="search1">
+    <!-- Simple header with scrollable tabs. -->
+    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
+        <header class="mdl-layout__header">
+            <div class="mdl-layout__header-row">
+                <!-- Title -->
+                <img src="" alt="Avatar" height="64" width="64" id="bimg">
+                <span class="mdl-layout-title" id="bname"></span>
             </div>
-          </div>
-        </div>
-
-
-        <!--
-        <div class="mdl-card2 amazing mdl-cell mdl-cell--12-col">
-          <div class="mdl-card__title mdl-color-text--grey-50">
-            <div class="mdl-textfield mdl-js-textfield">
-              <div class="mdl-select mdl-js-select mdl-select--floating-label">
-                <select class="mdl-select__input" id="professsion" name="professsion">
-          <option value=""></option>
-          <option value="option1">option 1</option>
-          <option value="option2">option 2</option>
-          <option value="option3">option 3</option>
-          <option value="option4">option 4</option>
-          <option value="option5">option 5</option>
-                <label class="mdl-select__label" for="professsion">Profession</label>
-              </div>
+            <!-- Tabs -->
+            <div class="mdl-layout__tab-bar mdl-js-ripple-effect">
+                <a href="#scroll-tab-1" class="mdl-layout__tab is-active">Quick Play</a>
+                <a href="#scroll-tab-2" class="mdl-layout__tab">Competitive</a>
+                <a href="#scroll-tab-3" class="mdl-layout__tab">History</a>
+                <a href="#scroll-tab-4" class="mdl-layout__tab">About</a>
             </div>
-          </div>
-        </div>
-        -->
-        <!--<input class="mdl-textfield__input" type="text" maxlength="12" value="US" id="search1">-->
+        </header>
+
+        <main class="mdl-layout__content">
+            <div class="demo-blog mdl-layout mdl-js-layout has-drawer is-upgraded">
+                <main class="mdl-layout__content">
+
+                    <section class="mdl-layout__tab-panel is-active" id="scroll-tab-1">
+
+                        <div class="demo-blog__posts mdl-grid">
 
 
-        <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
-          <div class="mdl-card__title mdl-color-text--grey-50">
-            <div class="mdl-textfield mdl-js-textfield">
-              <input class="mdl-textfield__input" type="number" maxlength="6" placeholder="Enter Blizzard ID & Hit Enter" id="search2">
-            </div>
-          </div>
-        </div>
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="qpwins">
 
-
-
-      </div>
-
-    </main>
-    <div class="mdl-layout__obfuscator"></div>
-  </div>
-  <script src="https://code.getmdl.io/1.3.0/material.min.js"></script>
-</body>
-<script>
-  Array.prototype.forEach.call(document.querySelectorAll('.mdl-card__media'), function(el) {
-    var link = el.querySelector('a');
-    if (!link) {
-      return;
-    }
-    var target = link.getAttribute('href');
-    if (!target) {
-      return;
-    }
-    el.addEventListener('click', function() {
-      location.href = target;
-    });
-  });
-</script>
-
-
-<script>
-  var namebox = document.getElementById('search1');
-  var idbox = document.getElementById('search2');
-
-  idbox.addEventListener('keypress', function(e) {
-    if (e.keyCode == 13) {
-
-      if (namebox.value == "" || idbox.value == "") {
-        window.alert("The name and/or id is blank. Please correct this.");
-        return;
-      }
-      searchName(namebox.value, idbox.value);
-    }
-  });
-
-  function searchName(name, id) {
-    var elemA = name;
-    var elemB = id;
-
-    var link = "index.html?name=" + elemA + "&id=" + elemB;
-
-
-    var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
-
-    var apiEndpoint = "https://final-overwatch.herokuapp.com/profile/pc/us/" + elemA + "-" + elemB;
-
-
-    $.ajax({
-      url: apiPassThruUrl,
-      dataType: "json",
-      method: 'GET',
-      data: {
-        "apiEndpoint": apiEndpoint,
-        "key": "gkaQ23znYPJa48MfEGiWN7Rmx",
-        "format": "json"
-      }
-    }).done(function(data) {
-      window.location.assign(link);
-    }).fail(function(data) {
-      window.alert(elemA + "#" + elemB + " not found for NA servers.");
-      return;
-    });
+                                    </div>
+                                </div>
+                            </div>
 
 
 
-  }
-</script>
+                        </div>
+
+                        <div class="demo-blog__posts mdl-grid">
 
 
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('sw.js', {
-        scope: './'
-      })
-      .then(function(registration) {
-        console.log('Service Worker Registered');
-      });
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="qptime">
 
-    navigator.serviceWorker.ready.then(function(registration) {
-      console.log('Service Worker Ready');
-    });
-  }
+                                    </div>
+                                </div>
+                            </div>
 
-  (function(i, s, o, g, r, a, m) {
-    i['GoogleAnalyticsObject'] = r;
-    i[r] = i[r] || function() {
-      (i[r].q = i[r].q || []).push(arguments)
-    }, i[r].l = 1 * new Date();
-    a = s.createElement(o),
-      m = s.getElementsByTagName(o)[0];
-    a.async = 1;
-    a.src = g;
-    m.parentNode.insertBefore(a, m)
-  })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-59325548-2', 'auto');
-  ga('send', 'pageview');
-</script>
+                        </div>
+
+                    </section>
+
+
+
+                    <section class="mdl-layout__tab-panel" id="scroll-tab-2">
+
+                        <center><img src="" alt="Avatar" height="96" width="96" id="brankimg"></center>
+
+                        <div class="demo-blog__posts mdl-grid">
+
+
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="compplayed">
+
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="demo-blog__posts mdl-grid">
+
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="compwins">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="demo-blog__posts mdl-grid">
+
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="comptime">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                        <div class="demo-blog__posts mdl-grid">
+
+
+                            <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                                <div class="mdl-card__title mdl-color-text--grey-50">
+                                    <div class="mdl-textfield mdl-js-textfield" id="comprank">
+
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </section>
+
+
+                    <section class="mdl-layout__tab-panel" id="scroll-tab-3">
+
+                        <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                            <div class="mdl-card__title mdl-color-text--grey-50">
+                                <div class="mdl-textfield mdl-js-textfield" id="history">
+
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+
+                    <section class="mdl-layout__tab-panel" id="scroll-tab-4">
+
+                        <div class="mdl-card amazing mdl-cell mdl-cell--12-col">
+                            <div class="mdl-card__title mdl-color-text--grey-50">
+                                <div class="mdl-textfield mdl-js-textfield" id="about">
+                                    This website was created by Talha Taj in 2017.
+                                </div>
+                            </div>
+                        </div>
+
+                    </section>
+
+                </main>
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+                <script>
+                    var name, bid;
+                    $(function() {
+                        // Extract the data from the url.
+                        var url = window.location.href;
+
+                        var name_start = url.indexOf("name=") + 5;
+                        var name_end = url.indexOf('&', name_start);
+                        name = url.substring(name_start, name_end);
+
+                        var id_start = url.indexOf("id=") + 3;
+                        var id_end = url.length;
+                        bid = url.substring(id_start, id_end);
+
+
+                        var data;
+                        var apiPassThruUrl = "https://polar-garden-75406.herokuapp.com/apiPassThru.php";
+                        var apiEndpoint = "https://final-overwatch.herokuapp.com/profile/pc/us/" + name + "-" + bid;
+
+                        $.ajax({
+                            url: apiPassThruUrl,
+                            dataType: "json",
+                            method: 'GET',
+                            data: {
+                                "apiEndpoint": apiEndpoint,
+                                "key": "gkaQ23znYPJa48MfEGiWN7Rmx",
+                                "format": "json"
+                            }
+                        }).done(function(data) {
+                            console.log("Success!");
+                            setupDb(data, window.location.href);
+                        });
+
+
+                    });
+
+
+                    function setupDb(data, apiEndpoint) {
+                        // Setup DB
+
+                        var db = new Dexie('owDBfinal-');
+                        db.version(1).stores({
+                            stats: '++id,url,username,level,portrait,levelframe,star,quickplaywins,playtimequickplay,competitivewins,competitiveplayed,playtimecompetitive,competitiverank,competitiverankimg'
+                        });
+
+
+                        var username = data["username"];
+                        var level = data["level"];
+                        var portrait = data["portrait"];
+
+                        var games = data["games"];
+                        var gamesqp = games["quickplay"];
+                        var gamesqpwins = gamesqp["wins"];
+
+                        var gamescomp = games["competitive"];
+                        var gamescompwins = gamescomp["wins"];
+                        var gamescompplayed = gamescomp["played"];
+
+                        var playtime = data["playtime"];
+                        var playtimeqp = playtime["quickplay"];
+                        var playtimecomp = playtime["competitive"];
+
+                        var competitive = data["competitive"];
+                        var competitiverank = competitive["rank"];
+                        var competitiverankimg = competitive["rank_img"];
+                        var competitiveframe = competitive["levelFrame"];
+                        var competitivestar = competitive["star"];
+
+
+                        $("#bname").text(' ' + username + "#" + bid + " - " + "LVL" + data["level"]);
+                        $("#bimg").attr("src", data["portrait"]);
+                        $("#qptime").text("Time Played - " + playtimeqp);
+                        $("#qpwins").text("Games Won - " + gamesqpwins);
+
+                        $("#comprank").text("Current Rank - " + competitiverank);
+                        $("#comptime").text("Time Played - " + playtimecomp);
+                        $("#compplayed").text("Games Played - " + gamescompplayed);
+                        $("#compwins").text("Games Won - " + gamescompwins);
+                        $("#brankimg").attr("src", competitive["rank_img"]);
+
+                        var t = 0;
+
+                        db.stats
+                            .where('username')
+                            .startsWith(username)
+                            .each(function(test) {
+                                console.log("Found " + test.username);
+                                t++;
+                            });
+
+                        window.setTimeout(function() {
+                            if (t == 0) {
+                                console.log("Adding " + username);
+                                db.stats.add({
+                                    url: apiEndpoint,
+                                    username: data["username"],
+                                    level: data["level"],
+                                    portrait: data["portrait"],
+                                    levelframe: competitive["levelFrame"],
+                                    star: competitive["star"],
+                                    quickplaywins: gamesqp["wins"],
+                                    playtimequickplay: playtime["quickplay"],
+                                    competitivewins: gamescomp["wins"],
+                                    competitiveplayed: gamescomp["played"],
+                                    playtimecompetitive: playtime["competitive"],
+                                    competitiverank: competitive["rank"],
+                                    competitiverankimg: competitive["rank_img"]
+                                });
+                            }
+
+                            var count = 0;
+                            var hist = document.getElementById('history');
+                            db.stats
+                                .each(function(test) {
+                                    if (test.username == username && count++ == 1) return;
+                                    hist.innerHTML = hist.innerHTML + "<a href=\"" + test.url + "\">" + test.username + "</a>" + " <br>";
+                                });
+                        }, 300);
+                    }
+                </script>
+
+                <script>
+                    if ('serviceWorker' in navigator) {
+                        navigator.serviceWorker.register('sw.js', {
+                                scope: './'
+                            })
+                            .then(function(registration) {
+                                console.log('Service Worker Registered');
+                            });
+
+                        navigator.serviceWorker.ready.then(function(registration) {
+                            console.log('Service Worker Ready');
+                        });
+                    }
+
+                    (function(i, s, o, g, r, a, m) {
+                        i['GoogleAnalyticsObject'] = r;
+                        i[r] = i[r] || function() {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date();
+                        a = s.createElement(o),
+                            m = s.getElementsByTagName(o)[0];
+                        a.async = 1;
+                        a.src = g;
+                        m.parentNode.insertBefore(a, m)
+                    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                    ga('create', 'UA-59325548-2', 'auto');
+                    ga('send', 'pageview');
+                </script>
+< /body>
 
 </html>
